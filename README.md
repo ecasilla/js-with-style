@@ -7,12 +7,12 @@ Thanks for wanting to contribute! This document describes some points about the 
 ## Table of Contents
 
   1. [Maintainers](#maintainers)
-  1. [Pull Requests](#pull-Requests)
-  1. [Filing Bugs](#filing-Bugs)
-  1. [Proposing Additions](#proposing-Additions)
-  1. [Implementing Additions](#implementing-Additions)
+  1. [Pull Requests](#pull-requests)
+  1. [Filing Bugs](#filing-bugs)
+  1. [Proposing Additions](#proposing-additions)
+  1. [Implementing Additions](#implementing-additions)
   1. [Environment](#environment)
-  1. [Commit Message](#commit-Message)
+  1. [Commit Message](#commit-message)
 
 ###Maintainers
 
