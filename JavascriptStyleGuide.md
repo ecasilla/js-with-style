@@ -1,6 +1,6 @@
-# Junta JavaScript Style Guide() {
+#JavaScript/Node Style Guide() {
 
-*A mostly reasonable approach to JavaScript*
+*A reasonable approach to JavaScript & Node*
 
 
 ## Table of Contents
@@ -55,7 +55,7 @@
     + `null`
     + `undefined`
 
-    ```
+    ```javascript
     var foo = 1;
     var bar = foo;
 
@@ -69,7 +69,7 @@
     + `array`
     + `function`
 
-    ```
+    ```javascript
     var foo = [1, 2];
     var bar = foo;
 
@@ -84,7 +84,7 @@
 
   - Use the literal syntax for object creation.
 
-    ```
+    ```javascript
     // bad
     var item = new Object();
 
@@ -94,7 +94,7 @@
 
   - Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
 
-    ```
+    ```javascript
     // bad
     var superman = {
       default: { clark: 'kent' },
@@ -110,7 +110,7 @@
 
   - Use readable synonyms in place of reserved words.
 
-    ```
+    ```javascript
     // bad
     var superman = {
       class: 'alien'
@@ -133,7 +133,7 @@
 
   - Use the literal syntax for array creation.
 
-    ```
+    ```javascript
     // bad
     var items = new Array();
 
@@ -143,7 +143,7 @@
 
   - Use Array#push instead of direct assignment to add items to an array.
 
-    ```
+    ```javascript
     var someStack = [];
 
 
@@ -156,7 +156,7 @@
 
   - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
-    ```
+    ```javascript
     var len = items.length;
     var itemsCopy = [];
     var i;
@@ -172,7 +172,7 @@
 
   - To convert an array-like object to an array, use Array#slice.
 
-    ```
+    ```javascript
     function trigger() {
       var args = Array.prototype.slice.call(arguments);
       ...
@@ -186,7 +186,7 @@
 
   - Use single quotes `''` for strings.
 
-    ```
+    ```javascript
     // bad
     var name = "Bob Parr";
 
@@ -203,7 +203,7 @@
   - Strings longer than 80 characters should be written across multiple lines using string concatenation.
   - Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
 
-    ```
+    ```javascript
     // bad
     var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
@@ -221,7 +221,7 @@
 
   - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
 
-    ```
+    ```javascript
     var items;
     var messages;
     var length;
@@ -270,7 +270,7 @@
 
   - Function expressions:
 
-    ```
+    ```javascript
     // anonymous function expression
     var anonymous = function() {
       return true;
@@ -290,7 +290,7 @@
   - Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
   - **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
 
-    ```
+    ```javascript
     // bad
     if (currentUser) {
       function test() {
@@ -309,7 +309,7 @@
 
   - Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
 
-    ```
+    ```javascript
     // bad
     function nope(name, options, arguments) {
       // ...stuff...
@@ -329,7 +329,7 @@
 
   - Use dot notation when accessing properties.
 
-    ```
+    ```javascript
     var luke = {
       jedi: true,
       age: 28
@@ -344,7 +344,7 @@
 
   - Use subscript notation `[]` when accessing properties with a variable.
 
-    ```
+    ```javascript
     var luke = {
       jedi: true,
       age: 28
@@ -364,7 +364,7 @@
 
   - Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
 
-    ```
+    ```javascript
     // bad
     superPower = new SuperPower();
 
@@ -377,7 +377,7 @@
     to worry about swapping out a `;` for a `,` or introducing punctuation-only
     diffs.
 
-    ```
+    ```javascript
     // bad
     var items = getItems(),
         goSportsTeam = true,
@@ -397,7 +397,7 @@
 
   - Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
 
-    ```
+    ```javascript
     // bad
     var i, len, dragonball,
         items = getItems(),
@@ -420,7 +420,7 @@
 
   - Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues.
 
-    ```
+    ```javascript
     // bad
     function() {
       test();
@@ -483,7 +483,7 @@
 
   - Variable declarations get hoisted to the top of their scope, but their assignment does not.
 
-    ```
+    ```javascript
     // we know this wouldn't work (assuming there
     // is no notDefined global variable)
     function example() {
@@ -511,7 +511,7 @@
 
   - Anonymous function expressions hoist their variable name, but not the function assignment.
 
-    ```
+    ```javascript
     function example() {
       console.log(anonymous); // => undefined
 
@@ -525,7 +525,7 @@
 
   - Named function expressions hoist the variable name, not the function name or the function body.
 
-    ```
+    ```javascript
     function example() {
       console.log(named); // => undefined
 
@@ -553,7 +553,7 @@
 
   - Function declarations hoist their name and the function body.
 
-    ```
+    ```javascript
     function example() {
       superPower(); // => Flying
 
@@ -581,8 +581,7 @@
     + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
     + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
 
-    ```
-    javascript
+    ```javascript
     if ([0]) {
       // true
       // An array is an object, objects evaluate to true
@@ -591,7 +590,7 @@
 
   - Use shortcuts.
 
-    ```
+    ```javascript
     // bad
     if (name !== '') {
       // ...stuff...
@@ -622,7 +621,7 @@
 
   - Use braces with all multi-line blocks.
 
-    ```
+    ```javascript
     // bad
     if (test)
       return false;
@@ -647,7 +646,7 @@
   - If you're using multi-line blocks with `if` and `else`, put `else` on the same line as your
     `if` block's closing brace.
 
-    ```
+    ```javascript
     // bad
     if (test) {
       thing1();
@@ -674,11 +673,11 @@
 
   - Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
 
-    ```
+    ```javascript
     // bad
     // make() returns a new element
     // based on the passed in tag name
-    //
+    
     // @param {String} tag
     // @return {Element} element
     function make(tag) {
@@ -706,7 +705,7 @@
 
   - Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
 
-    ```
+    ```javascript
     // bad
     var active = true;  // is current tab
 
@@ -738,7 +737,7 @@
 
   - Use `// FIXME:` to annotate problems.
 
-    ```
+    ```javascript
     function Calculator() {
 
       // FIXME: shouldn't use a global here
@@ -750,7 +749,7 @@
 
   - Use `// TODO:` to annotate solutions to problems.
 
-    ```
+    ```javascript
     function Calculator() {
 
       // TODO: total should be configurable by an options param
@@ -767,7 +766,7 @@
 
   - Use soft tabs set to 2 spaces.
 
-    ```
+    ```javascript
     // bad
     function() {
     ∙∙∙∙var name;
@@ -786,7 +785,7 @@
 
   - Place 1 space before the leading brace.
 
-    ```
+    ```javascript
     // bad
     function test(){
       console.log('test');
@@ -812,7 +811,7 @@
 
   - Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
 
-    ```
+    ```javascript
     // bad
     if(isJedi) {
       fight ();
@@ -836,7 +835,7 @@
 
   - Set off operators with spaces.
 
-    ```
+    ```javascript
     // bad
     var x=y+5;
 
@@ -846,14 +845,14 @@
 
   - End files with a single newline character.
 
-    ```
+    ```javascript
     // bad
     (function(global) {
       // ...stuff...
     })(this);
     ```
 
-    ```
+    ```javascript
     // bad
     (function(global) {
       // ...stuff...
@@ -861,7 +860,7 @@
     ↵
     ```
 
-    ```
+    ```javascript
     // good
     (function(global) {
       // ...stuff...
@@ -871,7 +870,7 @@
   - Use indentation when making long method chains. Use a leading dot, which
     emphasizes that the line is a method call, not a new statement.
 
-    ```
+    ```javascript
     // bad
     $('#items').find('.selected').highlight().end().find('.open').updateCount();
 
@@ -910,7 +909,7 @@
 
   - Leave a blank line after blocks and before the next statement
 
-    ```
+    ```javascript
     // bad
     if (foo) {
       return bar;
@@ -952,7 +951,7 @@
 
   - Leading commas: **Nope.**
 
-    ```
+    ```javascript
     // bad
     var story = [
         once
@@ -988,7 +987,7 @@
 
   > Edition 5 clarifies the fact that a trailing comma at the end of an ArrayInitialiser does not add to the length of the array. This is not a semantic change from Edition 3 but some implementations may have previously misinterpreted this.
 
-    ```
+    ```javascript
     // bad
     var hero = {
       firstName: 'Kevin',
@@ -1019,7 +1018,7 @@
 
   - **Yup.**
 
-    ```
+    ```javascript
     // bad
     (function() {
       var name = 'Skywalker'
@@ -1049,7 +1048,7 @@
   - Perform type coercion at the beginning of the statement.
   - Strings:
 
-    ```
+    ```javascript
     //  => this.reviewScore = 9;
 
     // bad
@@ -1067,7 +1066,7 @@
 
   - Use `parseInt` for Numbers and always with a radix for type casting.
 
-    ```
+    ```javascript
     var inputValue = '4';
 
     // bad
@@ -1091,7 +1090,7 @@
 
   - If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](http://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.
 
-    ```
+    ```javascript
     // good
     /**
      * parseInt was the reason my code was slow.
@@ -1103,7 +1102,7 @@
 
   - **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
 
-    ```
+    ```javascript
     2147483647 >> 0 //=> 2147483647
     2147483648 >> 0 //=> -2147483648
     2147483649 >> 0 //=> -2147483647
@@ -1111,7 +1110,7 @@
 
   - Booleans:
 
-    ```
+    ```javascript
     var age = 0;
 
     // bad
@@ -1131,7 +1130,7 @@
 
   - Avoid single letter names. Be descriptive with your naming.
 
-    ```
+    ```javascript
     // bad
     function q() {
       // ...stuff...
@@ -1145,7 +1144,7 @@
 
   - Use camelCase when naming objects, functions, and instances.
 
-    ```
+    ```javascript
     // bad
     var OBJEcttsssss = {};
     var this_is_my_object = {};
@@ -1164,7 +1163,7 @@
 
   - Use PascalCase when naming constructors or classes.
 
-    ```
+    ```javascript
     // bad
     function user(options) {
       this.name = options.name;
@@ -1186,7 +1185,7 @@
 
   - Use a leading underscore `_` when naming private properties.
 
-    ```
+    ```javascript
     // bad
     this.__firstName__ = 'Panda';
     this.firstName_ = 'Panda';
@@ -1197,7 +1196,7 @@
 
   - When saving a reference to `this` use `_this`.
 
-    ```
+    ```javascript
     // bad
     function() {
       var self = this;
@@ -1225,7 +1224,7 @@
 
   - Name your functions. This is helpful for stack traces.
 
-    ```
+    ```javascript
     // bad
     var log = function(msg) {
       console.log(msg);
@@ -1240,7 +1239,8 @@
   - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
 
   - If your file exports a single class, your filename should be exactly the name of the class.
-    ```
+  
+    ```javascript
     // file contents
     class CheckBox {
       // ...
@@ -1266,7 +1266,7 @@
   - Accessor functions for properties are not required.
   - If you do make accessor functions use getVal() and setVal('hello').
 
-    ```
+    ```javascript
     // bad
     dragon.age();
 
@@ -1282,7 +1282,7 @@
 
   - If the property is a boolean, use isVal() or hasVal().
 
-    ```
+    ```javascript
     // bad
     if (!dragon.age()) {
       return false;
@@ -1296,7 +1296,7 @@
 
   - It's okay to create get() and set() functions, but be consistent.
 
-    ```
+    ```javascript
     function Jedi(options) {
       options || (options = {});
       var lightsaber = options.lightsaber || 'blue';
@@ -1319,7 +1319,7 @@
 
   - Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!
 
-    ```
+    ```javascript
     function Jedi() {
       console.log('new jedi');
     }
@@ -1344,7 +1344,7 @@
       console.log('blocking');
     };
     ```
-## API best practices
+## API Best Practices
 
 Keep your APIs short, simple, and easy to remember. If you've got a hundred functions in your module, you might want to rethink your design and split those into other modules. 
 
@@ -1352,7 +1352,7 @@ You can use a default export to handle the most common use-case, for example: [c
 
 Classes and constructors can be a controversial topic, and it often comes down to preference. I've found the best approach is to avoid forcing the `new` operator on your end-user, and have parameters passed in an `options` object. This leads to a clear and consistent API, and hides internal implementation details of your module. 
 
-```
+```javascript
 var utils = require('utils');
 var extend = utils.extend;
 
@@ -1376,7 +1376,7 @@ module.exports = FunkyParser
 
   - Methods can return `this` to help with method chaining.
 
-    ```
+    ```javascript
     // bad
     Jedi.prototype.jump = function() {
       this.jumping = true;
@@ -1411,7 +1411,7 @@ module.exports = FunkyParser
 
   - It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
 
-    ```
+    ```javascript
     function Jedi(options) {
       options || (options = {});
       this.name = options.name || 'no name';
@@ -1443,7 +1443,7 @@ module.exports = FunkyParser
 
 ---
 
-```
+```javascript
 var util = require('util');
 
 function ToppingError(msg) {
@@ -1472,9 +1472,9 @@ orderPizza(['cheese'], function(err, order) {
 
 ## Events
 
-  - When attaching data payloads to events (whether DOM events or something more proprietary like Backbone events), pass a hash instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
+  - When attaching data payloads to events (whether DOM events or something more proprietary like Node events), pass a hash instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
 
-    ```
+    ```javascript
     // bad
     $(this).trigger('listingUpdated', listing.id);
 
@@ -1487,7 +1487,7 @@ orderPizza(['cheese'], function(err, order) {
 
     prefer:
 
-    ```
+    ```javascript
     // good
     $(this).trigger('listingUpdated', { listingId : listing.id });
 
@@ -1501,14 +1501,14 @@ orderPizza(['cheese'], function(err, order) {
   **[⬆ back to top](#table-of-contents)**
 
 
-## Modules
+## Front End Modules
 
   - The module should start with a `!`. This ensures that if a malformed module forgets to include a final semicolon there aren't errors in production when the scripts get concatenated. [Explanation](https://github.com/airbnb/javascript/issues/44#issuecomment-13063933)
   - The file should be named with camelCase, live in a folder with the same name, and match the name of the single export.
   - Add a method called `noConflict()` that sets the exported module to the previous version and returns this one.
   - Always declare `'use strict';` at the top of the module.
 
-    ```
+    ```javascript
     // fancyInput/fancyInput.js
 
     !function(global) {
@@ -1539,7 +1539,7 @@ orderPizza(['cheese'], function(err, order) {
 
   - Prefix jQuery object variables with a `$`.
 
-    ```
+    ```javascript
     // bad
     var sidebar = $('.sidebar');
 
@@ -1549,7 +1549,7 @@ orderPizza(['cheese'], function(err, order) {
 
   - Cache jQuery lookups.
 
-    ```
+    ```javascript
     // bad
     function setSidebar() {
       $('.sidebar').hide();
@@ -1577,7 +1577,7 @@ orderPizza(['cheese'], function(err, order) {
   - For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
   - Use `find` with scoped jQuery object queries.
 
-    ```
+    ```javascript
     // bad
     $('ul', '.sidebar').hide();
 
@@ -1596,9 +1596,9 @@ orderPizza(['cheese'], function(err, order) {
 
 **[⬆ back to top](#table-of-contents)**
 
-##Node
+##Node.js
 
-## Require
+## Require()
 
  - Name requires with appropriate casing (e.g. `UpperCamelCase` for
    constructors)
@@ -1611,16 +1611,16 @@ orderPizza(['cheese'], function(err, order) {
 
 ---
 
-```
-var util = require('util');
-var fs   = require('fs');
+```javascript
+var util    = require('util');
+var fs      = require('fs');
 
 var _       = require('lodash');
 var async   = require('async');
 var request = require('superagent');
 
-var foo = require('./foo');
-var bar = foo.bar;
+var foo     = require('./foo');
+var bar     = foo.bar;
 ```
 
 ### Use `module.exports` not `exports`
@@ -1631,7 +1631,7 @@ So what the problem? That sounds great.
 
 Well don't get too excited. `exports` only collects properties and attaches them if `module.exports` doesn't already have existing properties. If `module.exports` has any properties, everything attached to `exports` is ignored and not attached to `module.exports`.
 
-```
+```javascript
 module.exports = {};
 
 exports.someProperty = 'someValue';
@@ -1639,7 +1639,7 @@ exports.someProperty = 'someValue';
 
 `someProperty` won't be exported as part of the module.
 
-```
+```javascript
 var exportedObject = require('./mod');
 
 console.log(exportedObject); // {}
@@ -1647,7 +1647,7 @@ console.log(exportedObject); // {}
 
 The solution is simple. Don't use `exports` because it can create confusing, hard to track down bugs.
 
-```
+```javascript
 module.exports = {};
 
 module.exports.someProperty = 'someValue';
@@ -1655,7 +1655,7 @@ module.exports.someProperty = 'someValue';
 
 `someProperty` will be exported as part of the module.
 
-```
+```javascript
 var exportedObject = require('./mod');
 
 console.log(exportedObject); // { someProperty: 'someValue' }
@@ -1678,7 +1678,21 @@ The second problem is a bigger problem but builds on the first. If the module yo
 
 The solution to both of these problems is to always `require` modules at the top of your file, outside of any function call. Save the required module to a variable and use the variable instead of re-requiring the module. Node.js will save the module to that variable and your code will run much faster.
 
-```
+```javascript
+
+//Incorrect
+
+function myFunction(someArray){
+    var _ = require('underscore');
+    // use underscore without the need
+    // to require it again
+    _.sort(someArray, function(item){
+        // do something with item
+    });
+
+}
+
+//Correct
 var _ = require('underscore');
 
 function myFunction(someArray){
@@ -1698,7 +1712,7 @@ module.exports.myFunction = myFunction;
 
 Include `.json` in the filename.
 
-```
+```javascript
 // don't
 var data = require('./data');
 
@@ -1712,7 +1726,7 @@ var data = require('./data.json');
 `I think of my files in 3 sections:`
 
 ####Section 1: CommonJS Dependencies
-```
+```javascript
 var lib1 = require("lib1");
 var lib2 = require("lib2");
 ```
@@ -1722,7 +1736,7 @@ You don't need any additional wrapper functions. All node modules are [automatic
 
 This should be almost `exclusively functions` with a sprinkling of supporting variables or top level module code if needed.
 
-```
+```javascript
 var HELLO_CONST = 'hello world';
 
 function helper1() {
@@ -1738,7 +1752,7 @@ Keep section 2 `pure JS`. Don't use commonJS idioms in this middle "pure" sectio
 
 ####Section 3: CommonJS exports
 
-```
+```javascript
 exports.helper1 = helper1;
 exports.helper2 = helper2;
 ```
@@ -1754,7 +1768,7 @@ exports.helper2 = helper2;
 
 ####A single function (@substack style)
 
-```
+```javascript
 function degreesToRadians(degrees) {}
 
 module.exports = degreesToRadians;
@@ -1764,8 +1778,9 @@ module.exports = degreesToRadians;
 
 ####An object of functions.
 
-If your module is a set of helper functions, you should export an object containing those functions as properties
-```
+If your module is a set of helper functions, you should export an object containing those functions as properties.
+
+```javascript
 var foo = require("foo");
 
 function doubleFoo(value) {
@@ -1784,7 +1799,7 @@ exports.tripleFoo = tripleFoo;
 
 If your module is a `class design for object-oriented use`, export the constructor function
 
-```
+```javascript
 var GoCart = function() {
   this.wheels = 4;
 }
@@ -1799,7 +1814,7 @@ module.exports = GoCart;
 
 Once you have mastered the above 2 patterns (really!) and feel confident exporting a factory function that takes options and maybe does some other dynamic stuff, go for it, but when in doubt, stick with the first 2, simpler choices.
 
-```
+```javascript
 //do-stuff.js
 function doStuff(howFast, what) {
    return "I am doing " + what + " at speed " + howFast;
@@ -1816,7 +1831,7 @@ module.exports = setup;
 
 **So you could use that like**
 
-```
+```javascript
 var doStuff = require("./do-stuff")({howFast: "blazing speed"});
 console.log(doStuff.doStuff("jogging"));
 
@@ -1833,7 +1848,7 @@ console.log(doStuff.doStuff("jogging"));
 
 ---
 	
-	```
+	```javascript
      var _ = require('lodash');
 
      _.forEach(pizzas, function(pizza) {
@@ -1860,7 +1875,7 @@ The callback should always be the last argument in the list. Its first argument 
 
 Be very careful never to ever throw anything without passing the error back to the user. It's worse and useless. Just send the error message back as the first argument to the callback.
 
-  ```
+  ```javascript
   // a deeply-nested function including four asynchronous operations
   // BAD DO NOT DO THIS ANYWHERE
 
@@ -1921,7 +1936,7 @@ function writeCsvFile(target, data, callback) {
  - Please never nest tasks inside the async method call it makes it very verbose and hard to read at a high level.
  - If possible wrap the task flow inside a private function for testing the flow.
 
-```
+```javascript
 // Incorrect Style
  async.waterfall([
   function noop(callback){
@@ -1986,7 +2001,7 @@ module.exports = UpdateTimeStamp
 
 JavaScript is a weakly typed language. Any variable can be passed to any function `without conflict`, until you try to use that function.
 
-```
+```javascript
 function multiply(num1, num2) {
 
 	return num1 * num2;
@@ -2046,9 +2061,9 @@ Some IDEs will even use JSDoc to make code suggestions.
 **Tools**
 
   - Code Style Linters
-    + [JSHint](http://www.jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
-    + [JSCS](https://github.com/jscs-dev/node-jscs) - [Airbnb Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/airbnb.json)
-
+    + [JSHint](http://www.jshint.com/) 
+    + [JSCS](https://github.com/jscs-dev/node-jscs) 
+    
 **Other Styleguides**
 
   - [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
@@ -2145,4 +2160,4 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **[⬆ back to top](#table-of-contents)**
 
-};
+# };
