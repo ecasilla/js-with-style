@@ -1848,7 +1848,7 @@ console.log(doStuff.doStuff("jogging"));
 
 ---
 	
-	```javascript
+```javascript
      var _ = require('lodash');
 
      _.forEach(pizzas, function(pizza) {
@@ -1860,7 +1860,7 @@ console.log(doStuff.doStuff("jogging"));
      .map('name')
      .uniq()
      .value();
-	```
+```
 
 
  
